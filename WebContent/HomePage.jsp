@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+  <!-- ヘッダー読み込み -->
+  <jsp:include page="header.jsp"/>
+
+  hello world
+
+  <!-- フッター読み込み -->
+  <jsp:include page="footer.jsp"/>
 
 </body>
 </html>
