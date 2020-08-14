@@ -14,14 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 public class main extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Hello");
-		RequestDispatcher rd = request.getRequestDispatcher("HomePage.jsp");
+		String val = request.getParameter("value");
+		String nextPage = "HomePage.jsp";
+
+		//ページ遷移
+		if(val !=null) {
+			if(val.equals("login")) {
+				nextPage = "/LoginForm.jsp";
+			}
+			else if(val.equals("signup")) {
+				nextPage = "/SignUpForm.jsp";
+			}
+		}
+
+		RequestDispatcher rd = request.getRequestDispatcher(nextPage);
+
 		rd.forward(request, response);
 	}
-
 
 }

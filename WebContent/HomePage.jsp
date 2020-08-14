@@ -2,18 +2,19 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-  <!-- ヘッダー読み込み -->
-  <jsp:include page="header.jsp"/>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<%@include file="./css/style.css" %>
+	</head>
+	<body>
+	  <!-- ヘッダー読み込み -->
+	  <jsp:include page="header.jsp"/>
 
-  hello world
+	  hello world
 
-  <!-- フッター読み込み -->
-  <jsp:include page="footer.jsp"/>
+	  <!-- フッター読み込み -->
+	  <jsp:include page="footer.jsp"/>
 
-</body>
+	</body>
 </html>
