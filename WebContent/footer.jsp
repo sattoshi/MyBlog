@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <footer>
-  <div class = "logo"><a>MyBlog</a></div>
+  <div class = "logo"><a href="main">MyBlog</a></div>
 
   <!-- ログアウト状態時 -->
   <div>

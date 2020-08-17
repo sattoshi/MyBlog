@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<jsp:useBean id="user_db" scope="session" class="model.LoginUserBean" />
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		<link href="/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="/MyBlog/css/style.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 	  <!-- ヘッダー読み込み -->
@@ -16,10 +18,17 @@
 	  </div>
 
     <div>
-	   <form action="LoginServlet" method="post">
-		   ユーザ名：<input type="text" name="id" />
+	   <form action="./LoginServlet" method="post">
+		   ユーザ名：<input type="text" name="userName" value="<%=user_db.getUserName()%>" />
+
 		   パスワード：<input type="password" name="password" />
-		   <input type="submit" value="ログイン" />
+
+		   <%-- エラー時にメッセージを表示 --%>
+        <% if("logout".equals(session.getAttribute("login_db"))) { %>
+          <p>ユーザ名またはパスワードが異なります。</p>
+        <% } %>
+
+		   <input type="submit" name="submit" value="ログイン" />
 		 </form>
     </div>
 
