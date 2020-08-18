@@ -34,6 +34,7 @@ background: transparent;
 color: #3f3f3f;
 transition: color 0.3s;
 text-decoration: none;
+display: block;
 }
 
 table {
@@ -66,6 +67,7 @@ body {
   /*サイトのデフォルトとなる文字の色を指定*/
   color: #3F3F3F;
   overflow-x: hidden;
+
 }
 
 /*見出しを全て太字で表示 + 文字色を黒に*/
@@ -86,4 +88,114 @@ img {
 
 section{
   margin-top: 4rem;
+}
+
+.flex{
+	display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.text-link{
+  text-decoration: underline;
+}
+.text-link:hover{
+  color:#7AB624;
+	text-decoration: none;
+}
+
+
+.maxwidth800{
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left:1.25rem;
+  padding-right: 1.25rem;
+}
+
+
+/* ヘッダーデザイン */
+header {
+  position: sticky;
+  top: 0;
+  z-index:100;
+  background-color: #242424;
+  padding:1rem 2rem;
+}
+header a{
+	color:#fff;
+}
+
+.logo a{
+	font-size:2.5rem;
+}
+header .menu{
+	position:absolute;
+	right:5%;
+	top:50%;
+	transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+header .flex a{
+	margin-left:1rem;
+}
+
+/* メイン画像 */
+.main_image{
+  max-width: 100%;
+  position: relative;
+}
+.main_image_bg{
+  height: 0px;
+  width: 100%;
+  padding-top: 20%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../images/main_bg.jpg);
+  background-position: center bottom 30%;
+}
+.main_title{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+.main_title h2{
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 2rem;
+}
+
+
+/* フッターデザイン */
+footer{
+  background-color:#242424;
+  padding:1rem 2rem;
+  max-width:100%;
+  margin-top:3rem;
+}
+footer a{
+  color:#fff;
+}
+
+
+
+/* LoginFormデザイン */
+.login-form{
+	padding:3rem 5rem;
+	border:0.5px solid #3f3f3f;
+}
+.login-form .error-msg{
+	color:#DC143C;
+}
+#login .text-link{
+	text-align: right;
 }

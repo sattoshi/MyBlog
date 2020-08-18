@@ -9,33 +9,42 @@
 		<title>Insert title here</title>
 		<link href="/MyBlog/css/style.css" rel="stylesheet" type="text/css" />
 	</head>
-	<body>
+	<body id="login">
 	  <!-- ヘッダー読み込み -->
 	  <jsp:include page="header.jsp"/>
 
-	  <div class="main-bg-image">
-	   <h2>ログイン画面</h2>
-	  </div>
-
-    <div>
-	   <form action="./LoginServlet" method="post">
-		   ユーザ名：<input type="text" name="userName" value="<%=user_db.getUserName()%>" />
-
-		   パスワード：<input type="password" name="password" />
-
-		   <%-- エラー時にメッセージを表示 --%>
-        <% if("logout".equals(session.getAttribute("login_db"))) { %>
-          <p>ユーザ名またはパスワードが異なります。</p>
-        <% } %>
-
-		   <input type="submit" name="submit" value="ログイン" />
-		 </form>
+	  <div>
+     <div class="main_image">
+        <div class="main_image_bg">
+        </div>
+        <div class="main_title">
+          <h2>ログイン画面</h2>
+        </div>
+      </div>
     </div>
 
-	   <a href = "main?value=signup">アカウントがない方はこちら</a>
+    <!-- ログインフォーム -->
+    <section class="maxwidth800">
+	    <div class="login-form">
+		   <form action="./LoginServlet" method="post">
+			   ユーザ名：<input type="text" name="userName" value="<%=user_db.getUserName()%>" />
+
+			   パスワード：<input type="password" name="password" />
+
+			   <%-- エラー時にメッセージを表示 --%>
+			   <% System.out.println(request.getAttribute("error"));//デバック %>
+	        <% if("error_msg".equals(request.getAttribute("error"))) { %>
+	          <p class="error-msg">ユーザ名またはパスワードが異なります。</p>
+	        <% } %>
+
+			   <input type="submit" name="submit" value="ログイン" />
+			 </form>
+	    </div>
+
+		   <a class="text-link" href = "main?value=signup">アカウントがない方はこちら</a>
+	   </section>
 
 	  <!-- フッター読み込み -->
     <jsp:include page="footer.jsp"/>
-
   </body>
 </html>

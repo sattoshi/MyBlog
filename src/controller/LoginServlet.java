@@ -30,8 +30,6 @@ public class LoginServlet extends HttpServlet {
 
 		String btn = request.getParameter("submit");
 
-		System.out.println(btn);//デバック
-
 		HttpSession session = request.getSession();	// セッション
 		RequestDispatcher rd;						// 画面の情報
 
@@ -57,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 			//モデルの情報が当てはまらない場合エラーメッセージを出力
 			else {
 				// ログアウト状態
-				session.setAttribute("login_db", "logout");
+				request.setAttribute("error","error_msg");
 				// ③-2-2 つぎに表示させる画面（ビュー）を指定
 				rd = request.getRequestDispatcher("./LoginForm.jsp");
 			}
