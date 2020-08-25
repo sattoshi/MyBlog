@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<jsp:useBean id="user_db" scope="session" class="model.LoginUserBean" />
+<jsp:useBean id="user_db" scope="session" class="model.AccountBean" />
 
 <!DOCTYPE html>
 <html>
@@ -27,12 +27,11 @@
     <section class="maxwidth800">
 	    <div class="login-form">
 		   <form action="./LoginServlet" method="post">
-			   ユーザ名：<input type="text" name="userName" value="<%=user_db.getUserName()%>" />
+			   <p>ユーザ名：<input type="text" name="userName" value="<%=user_db.getUserName()%>" /></p>
 
-			   パスワード：<input type="password" name="password" />
+			   <p>パスワード：<input type="password" name="password" /></p>
 
 			   <%-- エラー時にメッセージを表示 --%>
-			   <% System.out.println(request.getAttribute("error"));//デバック %>
 	        <% if("error_msg".equals(request.getAttribute("error"))) { %>
 	          <p class="error-msg">ユーザ名またはパスワードが異なります。</p>
 	        <% } %>

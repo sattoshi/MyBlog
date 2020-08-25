@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,35 +13,48 @@ import javax.servlet.http.HttpSession;
 
 import model.AccountBean;
 import model.AccountDB;
+import model.AccountDao;
 
-
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/ProfileServlet")
+public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	//コンストラクタ
-	public LoginServlet() {
+    public ProfileServlet() {
         super();
     }
 
 
-	//POSTで送られてきた場合
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
 		String btn = request.getParameter("submit");
 
-		HttpSession session = request.getSession();	// セッション
-		RequestDispatcher rd;						// 画面の情報
+		if(btn.equals("登録")){
 
-		if(btn.equals("ログイン")){
-
+			String name = request.getParameter("name");
+			String profile = request.getParameter("profile");
 			String userName  = request.getParameter("userName");
 			String password = request.getParameter("password");
 
+
+			System.out.println("デバック"+userName);
+			System.out.println("デバック"+password);
+
+			AccountDao dao = new AccountDao();
+			HttpSession session = request.getSession();	// セッション
+			RequestDispatcher rd;
+
+			//USERデータベースへユーザ情報を登録
+			try {
+				dao.insertUser(name , profile , userName , password);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				dao.close();
+			}
+
 			AccountDB account = new AccountDB();
 			AccountBean bean = account.getUserData(userName, password);
-
 			//モデルの情報が存在する場合はsetAttributeメソッドを使ってセッションに情報をセット
 			if(bean != null) {
 				// モデル（ユーザ情報）
@@ -49,26 +63,19 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("login_db", "login");
 				// 投稿一覧ページの一覧を表示するためのサーブレットを指定
 				rd = request.getRequestDispatcher("PostServlet");
-			}
-			//モデルの情報が当てはまらない場合エラーメッセージを出力
-			else {
+			}else {
 				request.setAttribute("error","error_msg");
 				// つぎに表示させる画面（ビュー）を指定
-				rd = request.getRequestDispatcher("./LoginForm.jsp");
+				rd = request.getRequestDispatcher("./ProfileEditing.jsp");
 			}
+
 			rd.forward(request, response);
+
 		}
 
-		//ログアウトボタン押下時、セッションの情報を削除しHomePage.jspへリダイレクト
-		else if(btn.equals("ログアウト")){
-			session.removeAttribute("login_db");
-			session.removeAttribute("user_db");
-			response.sendRedirect("./HomePage.jsp");
-		}
+
 	}
 
-
-	//GETで送られてきた場合
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}

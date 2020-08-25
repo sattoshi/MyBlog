@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class LoginUserBean  implements Serializable{
+public class AccountBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private int id; 			//　ユーザID
@@ -12,7 +12,7 @@ public class LoginUserBean  implements Serializable{
 
 
 	//コンストラクタ(値を初期化)
-	public LoginUserBean() {
+	public AccountBean() {
 		this.id = 0;
 		this.userName   = "";
 		this.name = "";
