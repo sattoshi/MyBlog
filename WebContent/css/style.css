@@ -90,6 +90,10 @@ section{
   margin-top: 4rem;
 }
 
+.align-right{
+	text-align:right;
+}
+
 .flex{
 	display: -webkit-flex;
   display: -moz-flex;
@@ -106,6 +110,10 @@ section{
 .text-link:hover{
   color:#7AB624;
 	text-decoration: none;
+}
+.topic{
+	font-weight:600;
+	margin:0.5rem 0;
 }
 
 
@@ -179,7 +187,7 @@ header .flex a{
 footer{
   background-color:#242424;
   padding:1rem 2rem;
-  max-width:100%;
+  width:100vw;
   margin-top:3rem;
 }
 footer a{
@@ -210,4 +218,67 @@ footer a{
 }
 #signup .text-link{
   text-align: right;
+}
+
+h3{
+	font-size:1.5rem;
+	font-weight:600;
+	margin-bottom:1rem;
+}
+
+.user-info{
+	padding:3rem 5rem;
+  border:0.5px solid #3f3f3f;
+}
+.user-info .flex{
+	justify-content: flex-start;
+}
+.user-info .flex:last-child{
+	margin-top:2rem;
+}
+.user-info .flex p:first-child{
+	width:20%;
+}
+.user-info .flex p:last-child{
+	width:65%;
+	padding:0.5rem;
+  border:0.5px solid #3f3f3f;
+}
+
+.post-area{
+	padding-top:1rem;
+  border-top:0.5px solid #3f3f3f;
+}
+.post-area .flex{
+	justify-content: flex-start;
+}
+.post-area .flex .image-area{
+	width:35%;
+	margin-right:5%;
+}
+.post-area .flex .text-area{
+	widht:60%;
+}
+.post-titile{
+	font-size:1.25rem;
+	margin:0.5rem 0;
+	font-weight:600;
+	color:#7AB624;
+}
+.post-titile:hover{
+	text-decoration: underline;
+}
+
+
+.blogDetails .post-info{
+  padding:0.5rem;
+  border:0.5px solid #3f3f3f;
+}
+.blogDetails .image-area{
+	margin-top:3rem;
+	margin-right:auto;
+	margin-left:auto;
+}
+.blogDetails .text-area{
+  margin-top:3rem;
 }

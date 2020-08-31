@@ -36,10 +36,6 @@ public class ProfileServlet extends HttpServlet {
 			String userName  = request.getParameter("userName");
 			String password = request.getParameter("password");
 
-
-			System.out.println("デバック"+userName);
-			System.out.println("デバック"+password);
-
 			AccountDao dao = new AccountDao();
 			HttpSession session = request.getSession();	// セッション
 			RequestDispatcher rd;
@@ -61,6 +57,12 @@ public class ProfileServlet extends HttpServlet {
 				session.setAttribute("user_db", bean);
 				// ログイン状態
 				session.setAttribute("login_db", "login");
+				//次に遷移するページのフラグ
+				request.setAttribute("next_page", "BlogByAuthor");
+
+				//編集者ユーザID
+				request.setAttribute("author_id",bean.getId());
+
 				// 投稿一覧ページの一覧を表示するためのサーブレットを指定
 				rd = request.getRequestDispatcher("PostServlet");
 			}else {

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class AccountDB {
 
+	//IDパスワードに合うユーザの情報を格納する
 	public AccountBean getUserData(String userName, String password) {
 		AccountBean bean = null;
 		AccountDao dao = null;
@@ -38,6 +39,42 @@ public class AccountDB {
 		}
 
 		return bean;
+	}
+
+	//登録されているアカウント情報を格納する
+	public ArrayList<AccountBean> getAccountData() {
+		AccountBean bean = null;
+		AccountDao dao = null;
+		ResultSet rs = null;
+		ArrayList<AccountBean> beanList = new ArrayList<AccountBean>();
+
+		try {
+			// DAOクラスをインスタンス化
+			dao = new AccountDao();
+			// 画面で入力されたIDとパスワードを基にDB検索を実行
+			rs  = dao.selectUser();
+
+			while(rs.next()) {
+				// 検索結果が存在する場合はbeanに値をセット（結果が1件しか返らないことを想定）
+				bean = new AccountBean();
+				//ユーザID
+				bean.setId(rs.getInt("user_id"));
+				// 名前
+				bean.setName(rs.getString("name"));
+				// プロフィール
+				bean.setProfile(rs.getString("profile"));
+
+				beanList.add(bean);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 処理終了時に各接続を解除
+			dao.close();
+		}
+
+		return beanList;
 	}
 
 	//指定のuserNameが既にデータベースにある場合はtrue・ない場合はfalseを返すメソッド

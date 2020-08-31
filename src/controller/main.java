@@ -16,7 +16,8 @@ public class main extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String val = request.getParameter("value");
-		String nextPage = "HomePage.jsp";
+
+		String nextPage = null;
 
 		//ページ遷移
 		if(val !=null) {
@@ -26,6 +27,9 @@ public class main extends HttpServlet {
 			else if(val.equals("signup")) {
 				nextPage = "/SignUpForm.jsp";
 			}
+		}else {
+			nextPage = "PostServlet?value=home";
+
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher(nextPage);

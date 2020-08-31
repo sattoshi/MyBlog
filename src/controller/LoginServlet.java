@@ -47,6 +47,13 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("user_db", bean);
 				// ログイン状態
 				session.setAttribute("login_db", "login");
+
+				//次に遷移するページのフラグ
+				request.setAttribute("next_page", "BlogByAuthor");
+
+				//編集者ユーザID
+				request.setAttribute("author_id",bean.getId());
+
 				// 投稿一覧ページの一覧を表示するためのサーブレットを指定
 				rd = request.getRequestDispatcher("PostServlet");
 			}
@@ -58,19 +65,22 @@ public class LoginServlet extends HttpServlet {
 			}
 			rd.forward(request, response);
 		}
-
-		//ログアウトボタン押下時、セッションの情報を削除しHomePage.jspへリダイレクト
-		else if(btn.equals("ログアウト")){
-			session.removeAttribute("login_db");
-			session.removeAttribute("user_db");
-			response.sendRedirect("./HomePage.jsp");
-		}
 	}
-
 
 	//GETで送られてきた場合
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		String val = request.getParameter("value");
+		HttpSession session = request.getSession();	// セッション
+		RequestDispatcher rd;						// 画面の情報
+
+		//ログアウトボタン押下時、セッションの情報を削除しHomePage.jspへ
+		if(val.equals("logout")){
+			session.removeAttribute("login_db");
+			session.removeAttribute("user_db");
+
+			rd = request.getRequestDispatcher("PostServlet?value=home");
+			rd.forward(request, response);
+		}
 	}
 
 }

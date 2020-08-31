@@ -32,7 +32,6 @@
          <p>ユーザ名：<input type="text" name="userName" /></p>
 
          <%-- エラー時にメッセージを表示 --%>
-         <% System.out.println(request.getAttribute("error"));//デバック %>
           <% if("already_usename".equals(request.getAttribute("error"))) { %>
             <p class="error-msg">このユーザ名は既に登録されています。</p>
           <% } %>

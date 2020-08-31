@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.AccountBean;
 import model.AccountDB;
 
 @WebServlet("/SignUpServlet")
@@ -46,8 +45,9 @@ public class SignUpServlet extends HttpServlet {
 					request.setAttribute("userName", userName);
 					request.setAttribute("password", password);
 
-					AccountBean bean = null;
-					session.setAttribute("user_db", bean);
+					//sessionを初期化
+					session.removeAttribute("login_db");
+					session.removeAttribute("user_db");
 
 					rd = request.getRequestDispatcher("./ProfileEditing.jsp");
 

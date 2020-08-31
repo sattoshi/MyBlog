@@ -12,6 +12,33 @@ public class AccountDao {
 	private PreparedStatement ps = null;
 
 
+	// データベースから全てのユーザ情報を検索
+		public ResultSet selectUser() throws SQLException {
+			try {
+
+				// JDBCドライバのロード
+				// 「com.mysql.jdbc.Driver」クラス名
+				Class.forName("com.mysql.jdbc.Driver");
+
+				// データベースと接続（本来はユーザやパスワードも別管理にしておくのが理想）
+				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOG",
+												  "root",
+												  "admin000");
+				// SQL文を生成
+				ps = con.prepareStatement("select USER_ID, NAME, PROFILE from USER;");
+
+				// SQLを実行
+				rs = ps.executeQuery();
+
+			} catch(ClassNotFoundException ce) {
+
+				// JDBCドライバが見つからなかった場合
+				ce.printStackTrace();
+			}
+
+			return rs;
+		}
+
 	// データベースから指定されたユーザ名を使ってユーザ情報を検索
 	public ResultSet selectUser(String userName) throws SQLException {
 		try {
@@ -78,36 +105,36 @@ public class AccountDao {
 
 
 	// データベースへ指定されたユーザ情報を登録
-		public void insertUser(String name, String profile , String userName, String password) throws SQLException {
+	public void insertUser(String name, String profile , String userName, String password) throws SQLException {
 
-			try {
+		try {
 
-				// JDBCドライバのロード
-				// 「com.mysql.jdbc.Driver」クラス名
-				Class.forName("com.mysql.jdbc.Driver");
+			// JDBCドライバのロード
+			// 「com.mysql.jdbc.Driver」クラス名
+			Class.forName("com.mysql.jdbc.Driver");
 
-				// データベースと接続（本来はユーザやパスワードも別管理にしておくのが理想）
-				con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOG",
-												  "root",
-												  "admin000");
-				// SQL文を生成
-				ps = con.prepareStatement("insert into USER set NAME = ? , PROFILE = ? , USER_NAME = ? , PASSWORD = ?");
+			// データベースと接続（本来はユーザやパスワードも別管理にしておくのが理想）
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BLOG",
+											  "root",
+											  "admin000");
+			// SQL文を生成
+			ps = con.prepareStatement("insert into USER set NAME = ? , PROFILE = ? , USER_NAME = ? , PASSWORD = ?");
 
-				// 生成したSQL文の「？」の部分にIDとパスワードをセット
-				ps.setString(1, name);
-				ps.setString(2, profile);
-				ps.setString(3, userName);
-				ps.setString(4, password);
+			// 生成したSQL文の「？」の部分にIDとパスワードをセット
+			ps.setString(1, name);
+			ps.setString(2, profile);
+			ps.setString(3, userName);
+			ps.setString(4, password);
 
-				// SQLを実行
-				ps.executeUpdate();
+			// SQLを実行
+			ps.executeUpdate();
 
-			} catch(ClassNotFoundException ce) {
+		} catch(ClassNotFoundException ce) {
 
-				// JDBCドライバが見つからなかった場合
-				ce.printStackTrace();
-			}
+			// JDBCドライバが見つからなかった場合
+			ce.printStackTrace();
 		}
+	}
 
 		/**
 		 * コネクションをクローズします.

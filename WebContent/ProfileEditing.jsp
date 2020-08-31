@@ -39,9 +39,6 @@
          <input type="hidden" name="userName" value="<%= request.getAttribute("userName") %>"/>
          <input type="hidden" name="password" value="<%= request.getAttribute("password") %>"/>
 
-         <% System.out.println("ユーザ名" + request.getAttribute("userName"));//デバック %>
-         <% System.out.println("pass" + request.getAttribute("password"));//デバック %>
-
          <input type="submit" name="submit" value="登録" />
        </form>
       </div>
